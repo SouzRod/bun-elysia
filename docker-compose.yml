@@ -1,0 +1,53 @@
+volumes:
+  mongo_data_bun_elysia:
+
+networks:
+  bun_elysia_net:
+    driver: bridge
+
+services:
+  redis:
+    image: redis:alpine
+    container_name: bun_elysia_redis
+    networks:
+      - bun_elysia_net
+    ports:
+    - "6379:6379"
+    restart: always
+
+  mongo:
+    image: mongo:latest
+    container_name: bun_elysia_mongo
+    networks:
+      - bun_elysia_net
+    ports:
+    - "27017:27017"
+    volumes:
+      - mongo_data_bun_elysia:/data/db
+    restart: always
+
+  app:
+    container_name: bun_elysia_app
+    image: bun_elysia:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - bun_elysia_net
+    ports:
+      - "3000:3000"
+    environment:
+      # APP
+      PORT: 3000
+
+      # Redis
+      REDIS_ENABLED: true
+      REDIS_URI: redis://redis:6379
+      REDIS_DEFAULT_EXPIRE: 5
+
+      # MongoDB
+      MONGODB_URI: mongodb://mongo:27017/bun_elysia
+    depends_on:
+      - redis
+      - mongo
+    restart: always
