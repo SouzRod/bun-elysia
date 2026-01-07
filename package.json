@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "start": "bun --watch index.ts",
-    "start:prod": "./server"
+    "start:prod": "./server",
+    "test:coverage": "bun test --coverage"
   },
   "devDependencies": {
     "@types/bun": "latest"
