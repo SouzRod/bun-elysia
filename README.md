@@ -1,6 +1,7 @@
 # Bun + Elysia API
 
 Um projeto de estudo construído com **Bun** e **Elysia**, integrando MongoDB para persistência e Redis para cache.
+</br>
 Você pode comparar performance com o Node.js + fastify, usando o projeto [node-fastify](https://github.com/SouzRod/node-fastify) é o mesmo projeto que esse mas no ecosistema Node.js
 
 ## 📋 Sobre o Projeto
