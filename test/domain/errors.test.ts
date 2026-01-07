@@ -2,6 +2,7 @@ import { describe, it, expect } from 'bun:test'
 import { BaseError } from '../../src/domain/errors/baseError'
 import { BadRequestError, NotFoundError, UnauthorizedError } from '../../src/domain/errors'
 import { HttpStatus, HttpStatusName } from '../../src/domain/enum/http-status.enum'
+import { Document } from 'mongodb'
 
 describe('Domain Errors', () => {
   it('BaseError sets name and statusCode and toResponse works', async () => {
@@ -26,7 +27,7 @@ describe('Domain Errors', () => {
     expect(err.name).toBe(HttpStatusName.BAD_REQUEST)
     const res = err.toResponse()
     expect(res.status).toBe(HttpStatus.BAD_REQUEST)
-    const body = await res.json()
+    const body:Document = await err.toResponse().json() as Document
     expect(body.message).toBe('bad')
   })
 
@@ -34,7 +35,7 @@ describe('Domain Errors', () => {
     const err = new NotFoundError('missing')
     expect(err.statusCode).toBe(HttpStatus.NOT_FOUND)
     expect(err.name).toBe(HttpStatusName.NOT_FOUND)
-    const body = await err.toResponse().json()
+    const body:Document = await err.toResponse().json() as Document
     expect(body.statusCode).toBe(HttpStatus.NOT_FOUND)
   })
 
@@ -42,7 +43,7 @@ describe('Domain Errors', () => {
     const err = new UnauthorizedError('nope')
     expect(err.statusCode).toBe(HttpStatus.UNAUTHORIZED)
     expect(err.name).toBe(HttpStatusName.UNAUTHORIZED)
-    const body = await err.toResponse().json()
+    const body:Document = await err.toResponse().json() as Document
     expect(body.error).toBe(HttpStatusName.UNAUTHORIZED)
   })
 })
