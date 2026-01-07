@@ -9,12 +9,13 @@ COPY src ./src
 COPY index.ts build.ts tsconfig.json ./
 
 RUN bun build.ts
+RUN chmod +x build/server
 
 # Runtime
-FROM oven/bun:distroless
+FROM gcr.io/distroless/cc-debian12
 WORKDIR /app
 
-ENTRYPOINT []
+# ENTRYPOINT []
 
 COPY --from=build /app/build/server ./server
 
