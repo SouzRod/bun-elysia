@@ -12,7 +12,7 @@ services:
     networks:
       - bun_elysia_net
     ports:
-    - "6379:6379"
+      - "6379:6379"
     restart: always
 
   mongo:
@@ -21,7 +21,7 @@ services:
     networks:
       - bun_elysia_net
     ports:
-    - "27017:27017"
+      - "27017:27017"
     volumes:
       - mongo_data_bun_elysia:/data/db
     restart: always
@@ -41,7 +41,7 @@ services:
       PORT: 3000
 
       # Redis
-      REDIS_ENABLED: true
+      REDIS_ENABLED: false
       REDIS_URI: redis://redis:6379
       REDIS_DEFAULT_EXPIRE: 5
 
