@@ -1,6 +1,5 @@
 import { NotFoundError } from "@domain/errors";
-import { MongoDB, UpdateUser, User } from "@domain/interfaces";
-import { UserInput } from "@domain/interfaces/user-input.interface";
+import { MongoDB, UpdateUser, User, UserInput } from "@domain/interfaces";
 
 export class UpdateUserImpl implements UpdateUser {
 

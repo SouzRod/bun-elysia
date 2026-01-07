@@ -1,5 +1,4 @@
-import { AddUser, MongoDB, User } from "@domain/interfaces";
-import { UserInput } from "@domain/interfaces/user-input.interface";
+import { AddUser, MongoDB, User, UserInput } from "@domain/interfaces";
 
 export class AddUserImpl implements AddUser {
 
